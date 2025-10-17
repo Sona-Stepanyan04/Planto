@@ -106,6 +106,30 @@ $fwExtraBold: 800;
 //     }
 // }
 
+@keyframes menuDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes menuDropup {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
 body {
     font-family: "Inter", sans-serif;
     background-color: $cBgGreenDarck;
@@ -165,8 +189,16 @@ header {
             }
 
             .plants-menu {
-                opacity: 1;
+                animation-name: menuDropdown;
+                animation-duration: 4s;
+                animation-fill-mode: forwards;
             }
+        }
+
+        .plants-type:not(:hover) .plants-menu {
+            animation-name: menuDropup;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
         }
 
         a {
@@ -211,11 +243,16 @@ header {
             box-shadow: 0 18px 22px -6px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(220px);
             -webkit-backdrop-filter: blur(220px);
+            animation-fill-mode: both;
 
             li {
                 font-size: 1rem;
                 font-weight: $fwRegular;
                 padding: 0.5rem;
+
+                a {
+                    opacity: 1;
+                }
             }
         }
 
@@ -400,7 +437,7 @@ main {
                     .scroll-info {
                         position: relative;
                         display: flex;
-                        width: 25rem;
+                        width: 26rem;
                         overflow-x: auto;
                         overscroll-behavior-x: contain;
                         scroll-snap-type: x mandatory;
@@ -437,6 +474,11 @@ main {
                                 opacity: 0.75;
                             }
                         }
+                    }
+
+                    .scroll-info>* {
+                        scroll-snap-align: center;
+                        flex: 0 0 100%
                     }
 
                     .scroll-bar {
@@ -857,7 +899,7 @@ footer {
             }
         }
 
-        p{
+        p {
             font-size: 1.5rem;
             font-weight: $fwMedium;
         }
